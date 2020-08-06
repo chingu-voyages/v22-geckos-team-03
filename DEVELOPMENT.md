@@ -9,3 +9,14 @@ To manage and coordinate multiple pull requests the team will use three types of
 ![Git Workflow](./images/GitWorkflow.png)
 
 # Tech Stack
+# Framework
+* Sapper
+
+## Front End
+* Svelte
+* 
+## Back End
+* Node.js
+* Express
+* MongoDB
+* Socket.io
