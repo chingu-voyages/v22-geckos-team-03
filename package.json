@@ -1,0 +1,23 @@
+{
+  "name": "v22-geckos-team-03",
+  "version": "1.0.0",
+  "description": "A chat app that allows multiple users to interact in a chat room in real time",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chingu-voyages/v22-geckos-team-03.git"
+  },
+  "keywords": [
+    "chat",
+    "sockets"
+  ],
+  "author": "Chingu v22 geckos team 3",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/chingu-voyages/v22-geckos-team-03/issues"
+  },
+  "homepage": "https://github.com/chingu-voyages/v22-geckos-team-03#readme"
+}
