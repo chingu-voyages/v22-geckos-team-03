@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/chingu-voyages/v22-geckos-team-03/issues"
   },
-  "homepage": "https://github.com/chingu-voyages/v22-geckos-team-03#readme"
+  "homepage": "https://github.com/chingu-voyages/v22-geckos-team-03#readme",
+  "dependencies": {
+    "dotenv": "^8.2.0"
+  }
 }
