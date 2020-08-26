@@ -1,7 +1,7 @@
 <script>
   // TODO: wire up form submit handler
   function loginSubmit(e) {
-    console.log(e.target[0].value, e.target[0].value);
+    console.log(e.target[0].value, e.target[1].value);
   }
 </script>
 
