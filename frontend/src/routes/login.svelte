@@ -16,7 +16,6 @@
   <title>Login</title>
 </svelte:head>
 
-<!-- TODO: wire up form submit handler -->
 <form on:submit|preventDefault={loginSubmit}>
   <input type="text" placeholder="user" />
   <input type="password" placeholder="password" />
