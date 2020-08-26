@@ -1,3 +1,10 @@
+<style>
+  input {
+    min-height: 2rem;
+    font-size: 1rem;
+  }
+</style>
+
 <svelte:head>
   <title>Login</title>
 </svelte:head>
