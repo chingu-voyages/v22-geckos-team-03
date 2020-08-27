@@ -4,6 +4,19 @@ import compression from 'compression';
 import * as sapper from '@sapper/server';
 import mongodb from 'mongodb';
 
+
+const MongoClient = mongodb.MongoClient
+const mongoURL = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017'
+const dbName = 'chat-app'
+let db = null
+
+MongoClient.connect(mongoURL, { useNewUrlParser: true }, (err, client) => {
+    if(err) return console.log(err)
+    db = client.db(dbName)
+    console.log(`Connected MongoDB: ${mongoURL}`)
+    console.log(`Database: ${dbName}`)
+})
+
 const { PORT, NODE_ENV } = process.env;
 const dev = NODE_ENV === 'development';
 
