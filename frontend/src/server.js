@@ -26,6 +26,10 @@ polka() // You can also use Express
 		sirv('static', { dev }),
 		sapper.middleware()
 	)
+	.post('/register',(req,res)=> {
+		console.log(req.body)
+		res.send(`User: ${req.body}`)
+	})
 	.listen(PORT, err => {
 		if (err) console.log('error', err);
 	});
