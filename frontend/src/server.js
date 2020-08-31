@@ -22,7 +22,7 @@ const { PORT, NODE_ENV } = process.env;
 const dev = NODE_ENV === 'development';
 
 polka() // You can also use Express
-	.use(bodyParser.urlencoded({ extended: true }))
+	.use(bodyParser.urlencoded({ extended: false }))
 	.use(bodyParser.json())
 	.get('/getit',(req,res)=> {
 		res.end('hello')
