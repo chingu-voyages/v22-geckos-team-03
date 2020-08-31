@@ -21,15 +21,18 @@ const { PORT, NODE_ENV } = process.env;
 const dev = NODE_ENV === 'development';
 
 polka() // You can also use Express
+	.get('/getit',(req,res)=> {
+		res.end('hello')
+	})
+	.post('/getit',(req,res) => {
+		console.log(req.body)
+		res.end(JSON.stringify(req.body))
+	})
 	.use(
 		compression({ threshold: 0 }),
 		sirv('static', { dev }),
 		sapper.middleware()
 	)
-	.post('/register',(req,res)=> {
-		console.log(req.body)
-		res.send(`User: ${req.body}`)
-	})
 	.listen(PORT, err => {
 		if (err) console.log('error', err);
 	});
