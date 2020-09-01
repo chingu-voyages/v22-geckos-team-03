@@ -130,7 +130,44 @@ polka() // You can also use Express
 		failureFlash: true
 	}))
 	*/
-	.post('/message/:id', (req,res) => {
+	.post('/message', async (req,res) => {
+		try{
+			const messageObj = {
+				id: Date.now().toString(),
+				userId: req.body.userId,
+				userName: req.body.userName,
+				message: req.body.message
+			}
+			
+			mongodb.MongoClient.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017',
+									{ useNewUrlParser: true }, (err, client) => { 
+										if(err) return console.log(err)
+										return client.db('chat-app').collection('Message').insertOne(messageObj)
+									})
+									res.end('hello')
+		}
+		catch {
+			res.end('error')
+		}
+		
+		/*
+		try {
+			const messageObj = {
+				id: Date.now().toString(),
+				userId: req.body.userId,
+				userName: req.body.userName,
+				message: req.body.message
+			}
+			mongodb.MongoClient.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017',
+									{ useNewUrlParser: true }, (err, client) => { 
+										if(err) return console.log(err)
+										return client.db('chat-app').collection('Message').insertOne(messageObj)
+									})
+		}
+		catch(error) {
+			res.end('error')
+		}
+		*/
 		
 	})
 	.use(
