@@ -6,6 +6,7 @@ import mongodb from 'mongodb';
 import bodyParser from 'body-parser'
 const bcrypt = require('bcrypt')
 import initialize from 'passport-config.js'
+import passport from 'passport'
 
 /*
 const MongoClient = mongodb.MongoClient
