@@ -8,6 +8,7 @@ const bcrypt = require('bcrypt')
 import initialize from './passport-config'
 import passport from 'passport'
 const flash = require('express-flash')
+const session = require('express-session')
 const
 initialize(passport, email => {
 	users.find(user => user.email === email)
