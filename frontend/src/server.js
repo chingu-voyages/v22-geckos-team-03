@@ -5,8 +5,12 @@ import * as sapper from '@sapper/server';
 import mongodb from 'mongodb';
 import bodyParser from 'body-parser'
 const bcrypt = require('bcrypt')
-import initialize from 'passport-config.js'
+import initialize from './passport-config'
 import passport from 'passport'
+
+initialize(passport, email => {
+	users.find(user => user.email === email)
+})
 
 /*
 const MongoClient = mongodb.MongoClient
