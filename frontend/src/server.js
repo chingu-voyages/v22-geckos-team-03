@@ -13,9 +13,25 @@ import passport from 'passport'
 const flash = require('express-flash')
 const session = require('express-session')
 
-initialize(passport, email => {
-	users.find(user => user.email === email)
-})
+function getUserFromEmail(email){
+	mongodb.MongoClient.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017',
+								{ useNewUrlParser: true }, (err, client) => { 
+									if(err) return console.log(err)
+									return client.db('chat-app').collection('User').findOne({email: email})
+								})
+}
+function getUserFromId(id){
+	mongodb.MongoClient.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017',
+								{ useNewUrlParser: true }, (err, client) => { 
+									if(err) return console.log(err)
+									return client.db('chat-app').collection('User').findOne({id: id})
+								})
+								
+}
+initialize(passport, 
+	email => getUserFromEmail(email),
+	id => getUserFromId(id)
+)
 
 
 /*
