@@ -130,6 +130,9 @@ polka() // You can also use Express
 		failureFlash: true
 	}))
 	*/
+	.post('/message/:id', (req,res) => {
+		
+	})
 	.use(
 		compression({ threshold: 0 }),
 		sirv('static', { dev }),
