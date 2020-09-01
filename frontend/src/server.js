@@ -1,3 +1,6 @@
+if(process.env.NODE_ENV !== 'production'){
+	require('dotenv').config()
+}
 import sirv from 'sirv';
 import polka from 'polka';
 import compression from 'compression';
@@ -9,10 +12,16 @@ import initialize from './passport-config'
 import passport from 'passport'
 const flash = require('express-flash')
 const session = require('express-session')
-const
+
+app.use(flash())
+app.use(session({
+	secret: process.env.SESSION_SECRET,
+
+}))
 initialize(passport, email => {
 	users.find(user => user.email === email)
 })
+
 
 /*
 const MongoClient = mongodb.MongoClient
