@@ -5,6 +5,7 @@ import * as sapper from '@sapper/server';
 import mongodb from 'mongodb';
 import bodyParser from 'body-parser'
 const bcrypt = require('bcrypt')
+import initialize from 'passport-config.js'
 
 /*
 const MongoClient = mongodb.MongoClient
