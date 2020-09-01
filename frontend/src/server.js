@@ -13,14 +13,6 @@ import passport from 'passport'
 const flash = require('express-flash')
 const session = require('express-session')
 
-app.use(flash())
-app.use(session({
-	secret: process.env.SESSION_SECRET,
-	resave: false,
-	saveUninitialized: false
-}))
-app.use(passport.initialize())
-app.use(passport.session())
 initialize(passport, email => {
 	users.find(user => user.email === email)
 })
@@ -46,6 +38,14 @@ const dev = NODE_ENV === 'development';
 polka() // You can also use Express
 	.use(bodyParser.urlencoded({ extended: false }))
 	.use(bodyParser.json())
+	.use(flash())
+	.use(session({
+		secret: process.env.SESSION_SECRET,
+		resave: false,
+		saveUninitialized: false
+	}))
+	.use(passport.initialize())
+	.use(passport.session())
 	.get('/getit',(req,res)=> {
 		res.end('hello')
 	})
@@ -99,6 +99,11 @@ polka() // You can also use Express
 		})
 		*/
 	})
+	.post('/login', passport.authenticate('local',{
+		successRedirect: '/',
+		failureRedirect: '/login',
+		failureFlash: true
+	}))
 	.use(
 		compression({ threshold: 0 }),
 		sirv('static', { dev }),
