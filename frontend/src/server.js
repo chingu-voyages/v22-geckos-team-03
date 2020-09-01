@@ -86,10 +86,12 @@ polka() // You can also use Express
 					//db.collection('User').insert(userObj)
 											})
 											
-			res.end('user registered')
+			//res.end('user registered')
+			res.redirect('/login')
 		}
 		catch {
-			res.end('error')
+			res.redirect('/register')
+			//res.end('error')
 		}
 		/*
 		.post('/registerUser', async (req,res) => {
@@ -115,11 +117,19 @@ polka() // You can also use Express
 		})
 		*/
 	})
-	.post('/login', passport.authenticate('local',{
+	.post('/login',passport.authenticate('local', {
+		successRedirect: '/',
+		failureRedirect: '/login',
+		failureFlash: true
+	},
+	(req,res) => {res.json({userName: req.user.userName, email: req.user.email })})) 
+	/*
+	passport.authenticate('local',{
 		successRedirect: '/',
 		failureRedirect: '/login',
 		failureFlash: true
 	}))
+	*/
 	.use(
 		compression({ threshold: 0 }),
 		sirv('static', { dev }),
