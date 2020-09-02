@@ -13,6 +13,22 @@ import passport from 'passport'
 const flash = require('express-flash')
 const session = require('express-session')
 
+function addToDatabase(url, database,collection, dataObj) {
+	mongodb.MongoClient.connect(process.env.MONGODB_URI || url,
+								{ useNewUrlParser: true }, (err, client) => { 
+									if(err) return console.log(err)
+									return client.db(database).collection(collection).insertOne(dataObj)
+								})
+}
+
+function retriveFromDatabase(url, database, collection, dataObj) {
+	mongodb.MongoClient.connect(process.env.MONGODB_URI || url,
+		{ useNewUrlParser: true }, (err, client) => { 
+			if(err) return console.log(err)
+			return client.db(database).collection(collection).findOne(dataObj)
+		})
+}
+
 function getUserFromEmail(email){
 	mongodb.MongoClient.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017',
 								{ useNewUrlParser: true }, (err, client) => { 
@@ -29,8 +45,8 @@ function getUserFromId(id){
 								
 }
 initialize(passport, 
-	email => getUserFromEmail(email),
-	id => getUserFromId(id)
+	email => retriveFromDatabase('mongodb://127.0.0.1:27017', 'chat-app', 'User', { email: email }),
+	id => retriveFromDatabase('mongodb://127.0.0.1:27017', 'chat-app', 'User', { id: id })
 )
 
 
@@ -69,22 +85,25 @@ polka() // You can also use Express
 		try {
 			const hashedPassword = await bcrypt.hash(req.body.password, 10)
 			
-				const userObj = {
-					id: Date.now().toString(),
-					userName: req.body.userName,
-					email: req.body.email,
-					password: hashedPassword
-				}
+			const userObj = {
+				id: Date.now().toString(),
+				userName: req.body.userName,
+				email: req.body.email,
+				password: hashedPassword
+			}
+			addToDatabase('mongodb://127.0.0.1:27017', 'chat-app', 'User', userObj)
+			/*
 				
 				mongodb.MongoClient.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017',
 											{ useNewUrlParser: true }, (err, client) => { 
 												if(err) return console.log(err)
 												client.db('chat-app').collection('User').insertOne(userObj)
+												*/
 					//db = client.db(dbName)
 					//console.log(`Connected MongoDB: ${mongoURL}`)
 					//console.log(`Database: ${dbName}`)
 					//db.collection('User').insert(userObj)
-											})
+											//})
 											
 			//res.end('user registered')
 			res.redirect('/login')
