@@ -1,17 +1,21 @@
 if(process.env.NODE_ENV !== 'production'){
 	require('dotenv').config()
 }
-import sirv from 'sirv';
-import polka from 'polka';
-import compression from 'compression';
-import * as sapper from '@sapper/server';
-import mongodb from 'mongodb';
+import sirv from 'sirv'
+import polka from 'polka'
+import compression from 'compression'
+import * as sapper from '@sapper/server'
+import mongodb from 'mongodb'
 import bodyParser from 'body-parser'
 const bcrypt = require('bcrypt')
-import initialize from './passport-config'
+//import initialize from './passport-config'
 import passport from 'passport'
 const flash = require('express-flash')
 const session = require('express-session')
+const { PORT, NODE_ENV } = process.env
+const dev = NODE_ENV === 'development'
+const LocalStrategy = require('passport-local').Strategy
+
 
 function addToDatabase(url, database,collection, dataObj) {
 	mongodb.MongoClient.connect(process.env.MONGODB_URI || url,
@@ -29,45 +33,11 @@ function retriveFromDatabase(url, database, collection, dataObj) {
 		})
 }
 /*
-function getUserFromEmail(email){
-	mongodb.MongoClient.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017',
-								{ useNewUrlParser: true }, (err, client) => { 
-									if(err) return console.log(err)
-									return client.db('chat-app').collection('User').findOne({email: email})
-								})
-}
-function getUserFromId(id){
-	mongodb.MongoClient.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017',
-								{ useNewUrlParser: true }, (err, client) => { 
-									if(err) return console.log(err)
-									return client.db('chat-app').collection('User').findOne({id: id})
-								})
-								
-								
-}
-*/
 initialize(passport, 
 	email => retriveFromDatabase('mongodb://127.0.0.1:27017', 'chat-app', 'User', { email: email }),
 	id => retriveFromDatabase('mongodb://127.0.0.1:27017', 'chat-app', 'User', { id: id })
 )
-
-
-/*
-const MongoClient = mongodb.MongoClient
-const mongoURL = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017'
-const dbName = 'chat-app'
-let db = null
-
-MongoClient.connect(mongoURL, { useNewUrlParser: true }, (err, client) => {
-    if(err) return console.log(err)
-    db = client.db(dbName)
-    console.log(`Connected MongoDB: ${mongoURL}`)
-    console.log(`Database: ${dbName}`)
-})
 */
-
-const { PORT, NODE_ENV } = process.env;
-const dev = NODE_ENV === 'development';
 
 polka() // You can also use Express
 	.use(bodyParser.urlencoded({ extended: false }))
@@ -80,9 +50,6 @@ polka() // You can also use Express
 	}))
 	.use(passport.initialize())
 	.use(passport.session())
-	.get('/getit',(req,res)=> {
-		res.end('hello')
-	})
 	.post('/registerUser', async (req,res) => {
 		try {
 			const hashedPassword = await bcrypt.hash(req.body.password, 10)
@@ -94,18 +61,6 @@ polka() // You can also use Express
 				password: hashedPassword
 			}
 			addToDatabase('mongodb://127.0.0.1:27017', 'chat-app', 'User', userObj)
-			/*
-				
-				mongodb.MongoClient.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017',
-											{ useNewUrlParser: true }, (err, client) => { 
-												if(err) return console.log(err)
-												client.db('chat-app').collection('User').insertOne(userObj)
-												*/
-					//db = client.db(dbName)
-					//console.log(`Connected MongoDB: ${mongoURL}`)
-					//console.log(`Database: ${dbName}`)
-					//db.collection('User').insert(userObj)
-											//})
 											
 			res.end('user registered')
 			//res.redirect('/login')
@@ -114,29 +69,7 @@ polka() // You can also use Express
 			//res.redirect('/register')
 			res.end('error')
 		}
-		/*
-		.post('/registerUser', async (req,res) => {
-			try {
-
-				
-				const MongoClient = mongodb.MongoClient
-				const mongoURL = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017'
-				const dbName = 'chat-app'
-				let db = null
-				MongoClient.connect(mongoURL, { useNewUrlParser: true }, (err, client) => {
-					if(err) return console.log(err)
-					db = client.db(dbName)
-					console.log(`Connected MongoDB: ${mongoURL}`)
-					console.log(`Database: ${dbName}`)
-					db.collection('User').insert(userObj)
-				})
-			} catch {
-				res.end('error')
-			}
-			console.log(req.body)
-			res.end(JSON.stringify(req.body))
-		})
-		*/
+		
 	})
 	.post('/login',passport.authenticate('local', {
 		successRedirect: '/',
@@ -144,13 +77,6 @@ polka() // You can also use Express
 		failureFlash: true
 	},
 	(req,res) => {res.json({userName: req.user.userName, email: req.user.email })})) 
-	/*
-	passport.authenticate('local',{
-		successRedirect: '/',
-		failureRedirect: '/login',
-		failureFlash: true
-	}))
-	*/
 	.post('/message', async (req,res) => {
 		try{
 			const messageObj = {
@@ -161,38 +87,11 @@ polka() // You can also use Express
 			}
 
 			addToDatabase('mongodb://127.0.0.1:27017', 'chat-app','Message', messageObj)
-			/*
-			mongodb.MongoClient.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017',
-									{ useNewUrlParser: true }, (err, client) => { 
-										if(err) return console.log(err)
-										return client.db('chat-app').collection('Message').insertOne(messageObj)
-									})
-									*/
-									res.end('hello')
+			res.end('hello')
 		}
 		catch {
 			res.end('error')
 		}
-		
-		/*
-		try {
-			const messageObj = {
-				id: Date.now().toString(),
-				userId: req.body.userId,
-				userName: req.body.userName,
-				message: req.body.message
-			}
-			mongodb.MongoClient.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017',
-									{ useNewUrlParser: true }, (err, client) => { 
-										if(err) return console.log(err)
-										return client.db('chat-app').collection('Message').insertOne(messageObj)
-									})
-		}
-		catch(error) {
-			res.end('error')
-		}
-		*/
-		
 	})
 	.use(
 		compression({ threshold: 0 }),
@@ -202,3 +101,4 @@ polka() // You can also use Express
 	.listen(PORT, err => {
 		if (err) console.log('error', err);
 	});
+		
