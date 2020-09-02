@@ -28,7 +28,7 @@ function retriveFromDatabase(url, database, collection, dataObj) {
 			return client.db(database).collection(collection).findOne(dataObj)
 		})
 }
-
+/*
 function getUserFromEmail(email){
 	mongodb.MongoClient.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017',
 								{ useNewUrlParser: true }, (err, client) => { 
@@ -43,7 +43,9 @@ function getUserFromId(id){
 									return client.db('chat-app').collection('User').findOne({id: id})
 								})
 								
+								
 }
+*/
 initialize(passport, 
 	email => retriveFromDatabase('mongodb://127.0.0.1:27017', 'chat-app', 'User', { email: email }),
 	id => retriveFromDatabase('mongodb://127.0.0.1:27017', 'chat-app', 'User', { id: id })
@@ -105,12 +107,12 @@ polka() // You can also use Express
 					//db.collection('User').insert(userObj)
 											//})
 											
-			//res.end('user registered')
-			res.redirect('/login')
+			res.end('user registered')
+			//res.redirect('/login')
 		}
-		catch {
-			res.redirect('/register')
-			//res.end('error')
+		catch(error) {
+			//res.redirect('/register')
+			res.end('error')
 		}
 		/*
 		.post('/registerUser', async (req,res) => {
@@ -157,12 +159,15 @@ polka() // You can also use Express
 				userName: req.body.userName,
 				message: req.body.message
 			}
-			
+
+			addToDatabase('mongodb://127.0.0.1:27017', 'chat-app','Message', messageObj)
+			/*
 			mongodb.MongoClient.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017',
 									{ useNewUrlParser: true }, (err, client) => { 
 										if(err) return console.log(err)
 										return client.db('chat-app').collection('Message').insertOne(messageObj)
 									})
+									*/
 									res.end('hello')
 		}
 		catch {
