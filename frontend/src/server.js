@@ -16,6 +16,12 @@ const { PORT, NODE_ENV } = process.env
 const dev = NODE_ENV === 'development'
 const LocalStrategy = require('passport-local').Strategy
 
+const local = new LocalStrategy(
+	function(username, password, done) {
+		
+	}
+)
+
 
 function addToDatabase(url, database,collection, dataObj) {
 	mongodb.MongoClient.connect(process.env.MONGODB_URI || url,
