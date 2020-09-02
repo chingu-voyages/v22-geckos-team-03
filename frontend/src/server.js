@@ -61,6 +61,8 @@ initialize(passport,
 )
 */
 
+passport.use(local)
+
 polka() // You can also use Express
 	.use(bodyParser.urlencoded({ extended: false }))
 	.use(bodyParser.json())
