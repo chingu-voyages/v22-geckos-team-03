@@ -108,9 +108,6 @@
     border: none;
     border-radius: 1em;
   }
-  .logout-btn:focus {
-    border-radius: 1em;
-  }
   .outline {
     outline: none;
     box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.6);
