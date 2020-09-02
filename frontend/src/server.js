@@ -18,7 +18,23 @@ const LocalStrategy = require('passport-local').Strategy
 
 const local = new LocalStrategy(
 	function(username, password, done) {
-		
+		let user = retriveFromDatabase('mongodb://127.0.0.1:27017', 'chat-app', 'User', { userName: username })
+		if(!user){
+			return done(null, false, {message: 'Incorrect username' })
+		}
+		else {
+			let passwordMatch = bcrypt.compare(password, user.password, (err, isMatch) => {
+				if(err){return false}
+				return isMatch
+			})
+
+			if(passwordMatch) {
+				return done(null, user)
+			}
+			else {
+				return done(null, false, { message: 'Incorrect password' })
+			}
+		}
 	}
 )
 
