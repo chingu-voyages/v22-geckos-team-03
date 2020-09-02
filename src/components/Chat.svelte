@@ -99,7 +99,7 @@
     border-radius: 0.2em;
     padding: 0.7em;
   }
-  .login-btn {
+  .logout-btn {
     height: 2.2em;
     padding: 0 1em;
     font-weight: 500;
@@ -107,6 +107,16 @@
     background-color: #7557fa;
     border: none;
     border-radius: 1em;
+  }
+  .logout-btn:focus {
+    border-radius: 1em;
+  }
+  .outline {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.6);
+  }
+  .outline:focus {
+    transition: all 0.15s ease-out;
   }
 
   @media (min-width: 720px) {
@@ -127,7 +137,7 @@
         <div style="display: flex; justify-content: space-between;">
           <h1>Chat</h1>
           <button
-            class="login-btn"
+            class="logout-btn outline"
             on:click={() => {
               netlifyIdentity.logout();
               netlifyIdentity.open();
@@ -160,6 +170,7 @@
               chatMessage = '';
             }}>
             <input
+              class="outline"
               type="text"
               placeholder="Type in something..."
               on:change={(e) => (chatMessage = e.target.value)}
