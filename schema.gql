@@ -1,0 +1,9 @@
+type Message {
+  name: String!
+  message: String!
+}
+
+type Query {
+  allMessages: [Message!]
+  todosByUser(name: String!): [Message!]
+}
