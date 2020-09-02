@@ -104,9 +104,15 @@
     padding: 0 1em;
     font-weight: 500;
     color: white;
-    background-color: #7557fa;
+    background-color: hsl(251, 94%, 66%);
     border: none;
     border-radius: 1em;
+  }
+  .logout-btn:hover {
+    background-color: hsl(251, 94%, 62%);
+  }
+  .logout-btn:active {
+    background-color: hsl(251, 94%, 58%);
   }
   .outline {
     outline: none;
