@@ -15,7 +15,13 @@ const session = require('express-session')
 const { PORT, NODE_ENV } = process.env
 const dev = NODE_ENV === 'development'
 const LocalStrategy = require('passport-local').Strategy
-
+let dbclient = null
+mongodb.MongoClient.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017',
+	{ useNewUrlParser: true }, (err, client) => { 
+		if(err) return console.log(err)
+		dbclient = await client.db('chat-app')
+	})
+console.log('dbclient', dbclient)
 const local = new LocalStrategy(
 	function(username, password, done) {
 		let user = retriveFromDatabase('mongodb://127.0.0.1:27017', 'chat-app', 'User', { userName: username })
@@ -94,6 +100,14 @@ polka() // You can also use Express
 			res.end('error')
 		}
 		
+	})
+	.delete('/deleteUser', async (req,res) => {
+		try {
+			
+		}
+		catch(error){
+
+		}
 	})
 	.post('/login',passport.authenticate('local', {
 		successRedirect: '/',
