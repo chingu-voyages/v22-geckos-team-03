@@ -5,6 +5,10 @@
 
 **[See it live!](https://sl-chat-app.netlify.app/)**
 
+<!--
+TODO: Rename site and correct links! Also give a proper name and put it on top isntead of v22-geckos-team-03 because that's already the name of the repo
+-->
+
 ## Installation
 To install on local machine,
 1. Open terminal and move to the directory where you want to install
