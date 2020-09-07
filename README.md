@@ -1,7 +1,7 @@
 # v22-geckos-team-03
 Chat App to provide real time communication between muliple users via messages | Voyage-22 | https://chingu.io/
 
-Currently deployen on: https://sl-chat-app.netlify.app/
+Currently deployed on: https://sl-chat-app.netlify.app/
 
 ## Installation
 To install on local machine,
