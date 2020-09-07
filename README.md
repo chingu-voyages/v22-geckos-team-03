@@ -3,7 +3,7 @@
 
 ### A chat web app to provide real time communication between muliple users via messages
 
-[See it live!](https://sl-chat-app.netlify.app/)
+**[See it live!](https://sl-chat-app.netlify.app/)**
 
 ## Installation
 To install on local machine,
