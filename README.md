@@ -1,5 +1,13 @@
 # v22-geckos-team-03
-Chat Bot App to provide real time communication between muliple users via messages | Voyage-22 | https://chingu.io/
+💬 **[Chat App](https://sl-chat-app.netlify.app/)** | Voyage-22 | https://chingu.io/
+
+### A chat web app to provide real-time communication between muliple users via messages
+
+**[See it live!](https://sl-chat-app.netlify.app/)**
+
+<!--
+TODO: Rename site and correct links! Also give a proper name and put it on top isntead of v22-geckos-team-03 because that's already the name of the repo
+-->
 
 ## Installation
 To install on local machine,
@@ -10,5 +18,3 @@ To install on local machine,
 ## Launch
 1. cd v22-geckos-team-03
 2. npm start
-
-
