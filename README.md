@@ -18,3 +18,8 @@ To install on local machine,
 ## Launch
 1. cd v22-geckos-team-03
 2. npm run dev
+
+## Contributing
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change. 
+
+Please make sure the update tests are appropriate.
