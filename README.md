@@ -17,4 +17,4 @@ To install on local machine,
 
 ## Launch
 1. cd v22-geckos-team-03
-2. npm start
+2. npm run dev
