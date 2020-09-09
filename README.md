@@ -23,3 +23,10 @@ To install on local machine,
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change. 
 
 Please make sure the update tests are appropriate.
+
+1. Option 1: Fork this repo. Option 2: Clone this repo to your local machine.
+2. Create a branch on local machine.
+3. Make a pull request at Git Hub Repository.
+
+## License
+[MIT](https://choosealicense.com/licenses/mit/)
