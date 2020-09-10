@@ -12,6 +12,8 @@ TODO: Rename site and correct links! Also give a proper name and put it on top i
 ## Demo
 ![](ez.gif)
 
+![](ez2.gif)
+
 ## Installation
 To install on local machine,
 1. Open terminal and move to the directory where you want to install
