@@ -1,14 +1,91 @@
-# v22-geckos-team-03
-Chat Bot App to provide real time communication between muliple users via messages | Voyage-22 | https://chingu.io/
+# Serverless Chat
 
-## Installation
-To install on local machine,
-1. Open terminal and move to the directory where you want to install
-2. Before installing, make sure you have node.js installed
-3. git clone git@github.com:chingu-voyages/v22-geckos-team-03.git
+💬 **[Chat App](https://sl-chat-app.netlify.app/)** | Voyage-22 | https://chingu.io/
 
-## Launch
-1. cd v22-geckos-team-03
-2. npm start
+### A chat web app to provide real-time communication between multiple users via messages, powered by Serverless tech!
+
+<p align="center">
+  <img alt="preview login"src="ez.gif">
+  <img alt="preview chat"src="ez2.gif">
+</p>
+
+## Features
+
+⚡ Serverless functionality w/ Netlify Functions
+
+⚡ Login & auth w/ Netlify Identity
+
+⚡ Realtime chat & managed websockets w/ Pusher
+
+⚡ Chat history backed by FaunaDB
+
+**[See it live!](https://sl-chat-app.netlify.app/)**
+
+## The 🦎 Team
+
+**[Adam Shaffer](https://github.com/GreatDeveloper66)**, **[Armchair Traveller](https://github.com/armchair-traveller)**, **[David](https://github.com/dmedford)**, and **Kevin F**.
+
+## Technologies Used
+
+**Web Framework:** [Svelte](https://svelte.dev/)
+
+- Next generation component framework that is touted as the "un-framework" as its magic is done during compile-time. By generating standard run-of-the-mill JavaScript from framework specific syntax, it can selectively produce code that it needs to run, and no further. This results in low bundle sizes and performant applications for little cost, while maintaining a great developer experience. Its declarative syntax closely resembles vanilla JavaScript plus a large variety of shorthand conveniences, but without the extra mental overhead of manually writing every DOM manipulation.
+
+**App Framework:** [Sapper](https://sapper.svelte.dev/)
+
+- A Svelte web application framework that's small and performant just like Svelte, heavily inspired by Next.js.
+
+**Database**: [FaunaDB](https://fauna.com/)
+
+- Offers a database for Serverless applications that does not require worrying about latency, provisioning, scale, or database correctness. On top of that, it is ACID compliant. Because of these reasons it is simple, reliable, and productive to work in. Built-in GraphQL support.
+
+**Realtime:** [Pusher Channels](https://pusher.com/channels)
+
+- Offers managed websocket connections, and fallbacks in the cases where websockets aren't available. It can do pretty much everything you'd want live like collaboration/activity feeds and messaging. Dating all the way back from 2011, their reliability is no small feat.
+
+**Deployment:** [Netlify](https://www.netlify.com/)
+
+- The golden standard for JAM (JavaScript, APIs, and Markup) stack app hosting. Has a myriad of features built-in without need for configuration like CI/CD, plugins, CDN, and much more. Essentially an entire platform with its ability to easily add dynamic functionality like user identity, Serverless functions, forms, analytics... the list goes on and on. Simply link to a repo and start developing!
+
+## How to Deploy
+
+<details>
+
+  <summary><strong>These instructions allow you to deploy your very own instance of this chat app</strong></summary>
+
+  1. Clone the repo and deploy it to Netlify. See [how to create deploys](https://docs.netlify.com/site-deploys/create-deploys/#deploy-with-git).
+  2. In your app's Netlify dashboard, [Enable Identity](https://docs.netlify.com/visitor-access/identity/#enable-identity-in-the-ui). 
+      - **Note that** you can enable any extra login integrations you want here through *Settings and usage*, e.g. GitHub or Google login options
+  3. Next, setup a new database with [FaunaDB](https://fauna.com/). Take note of the database's given secret/key because you'll need it later! 
+  4. Inside the database's UI, click the GRAPHQL tab and upload `schema.gql` from the root of your app's repo. This prepares the database to accept your app's messages!
+  5. Now, setup realtime with [Pusher](https://pusher.com/) by creating a new Channels app through your dashboard. Make sure you select `us3` as your cluster because you can't change this later!
+  6. In your Pusher app's dashboard, go to the App Keys tab and take note the values for `app_id`, `key`, and `secret` because we'll need it soon! 
+      - For those concerned with security implications of these values, only the `secret` should be kept strictly confidential, never reveal it to clients.
+  7. In your app's repo, add your Pusher key value (not the secret!) by modifying `PUSHER_KEY`'s value in `src/utils/Pusher.js`. This will allow clients to subscribe to your chat's channel. Commit the change.
+  8. In your app's Netlify dashboard, go to **Site settings > Build & Deploy > Environment**. Add the environment variable values noted before as:
+      - `FAUNA_SECRET`
+      - `PUSHER_APP_ID`
+      - `PUSHER_KEY`
+      - `PUSHER_SECRET`
+  9. Finally, head to **Deploys** and trigger a deploy.
+  
+  Serverless functions are already enabled and configured through the `netlify.toml` config. There's nothing you need to do here.
+
+  Congrats, you now have your own Serverless chat app! 🥳 Your secret keys are protected through Serverless functions and there aren't any servers you need to manage! All of this remains in generous free tiers.
+  
+</details>
 
 
+## Development
+
+For development, you'll need to [install the Netlify CLI](https://docs.netlify.com/cli/get-started/#installation) for the Serverless functions to work locally. You'll also need to make a `.env` file in your app's root directory (WARNING: Do not add this file to GitHub, the `.gitignore` file already ignores it) with the environment variable values obtained from the deploy instructions.
+
+Once installed, run `ntl dev` and you'll be able to develop on your machine. You will still need a network connection. Uncomment `username = "dev_env"` in `src/components/Chat.svelte` to test chat functionalities without logging in.
+
+## Contributing
+
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
