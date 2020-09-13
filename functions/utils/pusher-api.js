@@ -3,7 +3,7 @@ var Pusher = require("pusher");
 module.exports = function (
   {
     appId = "1063365",
-    key = "6edf6832eba1a1944fc0",
+    key = process.env.PUSHER_KEY,
     secret = process.env.PUSHER_SECRET,
     cluster = "us3",
   } = {},

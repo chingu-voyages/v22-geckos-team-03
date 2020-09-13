@@ -49,7 +49,7 @@
       );
 
       // sub to the chat channel
-      const pusher = new Pusher("6edf6832eba1a1944fc0", {
+      const pusher = new Pusher(process.env.PUSHER_KEY, {
         cluster: "us3",
         authEndpoint: "/.netlify/functions/auth",
       });
