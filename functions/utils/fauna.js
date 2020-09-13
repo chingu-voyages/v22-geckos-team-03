@@ -10,7 +10,7 @@ async function query({ query, variables = {} }) {
     body: JSON.stringify({ query, variables }),
   }).then((response) => response.json());
 
-  // TODO send back helpful information if there are errors
+  // You can handle errors here if needed
 
   return result.data;
 }

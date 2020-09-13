@@ -34,7 +34,7 @@
     username = localStorage.getItem("gotrue.user");
     username =
       (username && JSON.parse(username).user_metadata.full_name) || null;
-    // username = "dev_env"; // TODO: Remove in prod, for dev test only
+    // username = "dev_env"; // Comment out line in prod, for dev testing purposes only w/ Netlify Identity's buggy dev login
     if (!username) {
       // not logged in, open login
       netlifyIdentity.open();
@@ -132,7 +132,6 @@
 
 <div id="netlify-modal" />
 
-<!-- TODO: Loading indicators through await block -->
 <div class="background">
   {#if dbQuery && username}
     {#await dbQuery then dbMessages}
