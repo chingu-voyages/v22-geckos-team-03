@@ -80,9 +80,15 @@
 
 For development, you'll need to [install the Netlify CLI](https://docs.netlify.com/cli/get-started/#installation) for the Serverless functions to work locally.
 
-Once installed, run `npm i` to install dependencies then `ntl link` to link to your site. Select your current git remote origin for ease of linking. Environment variables will automatically be obtained from the site and you'll be able to develop on your machine. You will still need a network connection. Uncomment `username = "dev_env"` in `src/components/Chat.svelte` to test chat functionalities without logging in.
+Once installed, run `npm i` in your app's root directory to install dependencies. To initialize the environment variables you have two options...
+
+**Option 1: Login method** (for main contributor or solo teams, fastest) - `ntl link` to link to your site. Select your current git remote origin for ease of linking. Environment variables will automatically be obtained from the site and you'll be able to develop on your machine.
+
+**Option 2: `.env` method** (for additional team members) - Create a `.env` file in your app's root directory and add in the environment variables obtained from the deploy instructions. **Make sure not to commit this to the repo**, there's a `.gitignore` to ignore it but it's crucial to understand secrets should not be shown in the codebase.
 
 **Note**: When developing locally, you cannot use Oauth (external providers) like GitHub to test. Only traditional email and password login will work. See [this issue](https://github.com/netlify/netlify-identity-widget/issues/86) for more details.
+
+After following either option, run `ntl dev` and you're ready to go. You will still need a network connection. Uncomment `username = "dev_env"` in `src/components/Chat.svelte` to test chat functionalities without logging in.
 
 ## Contributing
 
