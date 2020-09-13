@@ -4,6 +4,7 @@
   import { goto } from "@sapper/app";
   import { fly, fade } from "svelte/transition";
   import netlifyIdentity from "netlify-identity-widget";
+  import pusher from "../utils/Pusher";
 
   let messages = [];
   let chatMessage = "";
@@ -49,10 +50,6 @@
       );
 
       // sub to the chat channel
-      const pusher = new Pusher(process.env.PUSHER_KEY, {
-        cluster: "us3",
-        authEndpoint: "/.netlify/functions/auth",
-      });
       const channel = pusher.subscribe("chat-channel");
       channel.bind("message", (data) => {
         messages = [...messages, data];
