@@ -23,7 +23,7 @@
 
 ## The 🦎 Team
 
-**[Adam Shaffer](https://github.com/GreatDeveloper66)**, **[Armchair Traveller](https://github.com/armchair-traveller)**, **[David](https://github.com/dmedford)**, and **[Kevin F]()**.
+**[Adam Shaffer](https://github.com/GreatDeveloper66)**, **[Armchair Traveller](https://github.com/armchair-traveller)**, **[David](https://github.com/dmedford)**, and **Kevin F**.
 
 ## Technologies Used
 
